@@ -1,0 +1,26 @@
+python setup.py build
+
+protoc object_detection/protos/*.proto --python_out=.
+
+SET PYTHONPATH=%cd%;%cd%\slim
+
+python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/faster_rcnn_inception_v2_pets.config
+
+python export_inference_graph.py --input_type image_tensor 
+--pipeline_config_path E:/object detection/models-master/research/object_detection/training/faster_rcnn_inception_v2_pets.config 
+--trained_checkpoint_prefix E:/object detection/models-master/research/object_detection/training/model.ckpt-32014 
+--output_directory E:/object detection/models-master/research/object_detection/inference_graphew
+
+
+
+python export_inference_graph.py --input_type image_tensor --pipeline_config_path E:/object detection/models-master/research/object_detection/training/faster_rcnn_inception_v2_pets.config --trained_checkpoint_prefix E:/object detection/models-master/research/object_detection/training/model.ckpt-21347--output_directory E:/object detection/models-master/research/object_detection/inference_graphew
+
+
+python train.py --logtostderr --train_dir=E:/object_detection/fruit_image_OD/research/object_detection/training/ --pipeline_config_path=E:/object_detection/fruit_image_OD/research/object_detection/training/faster_rcnn_inception_v2_pets.config
+
+Fixed with this code
+
+python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/ssd_mobilenet_v1_pets.config --trained_checkpoint_prefix training/model.ckpt-3970 --output_directory ships_inference_graph
+
+
+(object_detection) E:\object detection\models-master\research\object_detection>python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/faster_rcnn_inception_v2_pets.config --trained_checkpoint_prefix training/model.ckpt-32014 --output_directory inference_graphew
